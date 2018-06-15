@@ -328,7 +328,8 @@ print("Cloudfront")
 clfc = boto3.client('cloudfront', region_name=region_name)
 print("--- Clean distribution")
 clfs = clfc.list_distributions().get('DistributionList').get('Items')
-for clf in clfs:
+if clfs is not None:
+ for clf in clfs:
   clf_id = clf.get('Id')
   dist = clfc.get_distribution(Id=clf_id).get('Distribution')
   dist_conf = clfc.get_distribution_config(Id=clf_id)
