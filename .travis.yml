@@ -1,1 +1,5 @@
 language: python
+install:
+  - pip install pylint
+script:
+  - pylint delete_vpcs.py
