@@ -18,6 +18,10 @@ Some useful scripts to list or clean entire environments.
       1. [Description](#description)
       2. [Usage](#usage)
       3. [Examples](#examples)
+   3. [Delete Main AWS Services from Region](#delete-main-aws-services-from-region)
+      1. [Description](#description)
+      2. [Usage](#usage)
+      3. [Examples](#examples)
 
 ## Requirements
 These scripts depends on `boto3` package, the AWS SDK for Python and require Python 2.6+.
@@ -88,9 +92,10 @@ Your aws profile is ready.
 #### Description
 Name: `delete_vpcs.py`
 Description: Clear non-default resources on the region (from your profile or in parameter of the script).
+Technical: This script mainly uses `boto3.resource` class to instanciate AWS entities.
 Parameters:
-* `--region_name <region>` : (string) Name of the (only one) AWS Region (e.g. eu-west-1, eu-central-1)
 * `--check` : (none) Enable check mode and do not apply deletions
+* `--region_name <region>` : (string) Name of the (only one) AWS Region (e.g. eu-west-1, eu-central-1)
 
 #### Usage
 ```bash
@@ -126,6 +131,7 @@ $ ./delete_vpcs.py --region_name=eu-central-1
 #### Description
 Name: `list_region_vpc.py`
 Description: List non-default VPCs and instances (for the moment) with their creator in order to trace who created it.
+Technical: This script mainly uses `boto3.resource` class to instanciate AWS entities.
 Parameters:
 * `--check` : (none) Enable check mode and do not apply any action [implemented but not used yet]
 
@@ -147,3 +153,41 @@ Show some help
 $ ./list_region_vpc.py -h
 ```
 
+
+### Delete Main AWS Services from Region
+
+#### Description
+Name: `reset_region.py`
+Description: Browse and delete main AWS Service non-default resources.
+Technical: This script mainly uses `boto3.client` class to instanciate AWS entities.
+Parameters:
+* `--check` : (none) Enable check mode and do not apply any action [implemented but not used yet]
+* `--region_name <region>` : (string) Name of the (only one) AWS Region (e.g. eu-west-1, eu-central-1)
+
+#### Usage
+```bash
+$ ./reset_region.py
+```
+```
++-----------------------------------+
+|       Delete all non default      |
+|    resources and sub-resources    |
++-----------------------------------+
+```
+
+#### Examples
+
+Show some help
+```bash
+$ ./reset_region.py -h
+```
+
+Run on Dry Run
+```bash
+$ ./reset_region.py --check
+```
+
+Run on a specific region (parameter override profile)
+```bash
+$ ./reset_region.py --region_name=eu-central-1
+```
