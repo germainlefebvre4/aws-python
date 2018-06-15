@@ -2,6 +2,11 @@
 
 Some useful scripts to list or clean entire environments.
 
+Table of Contents
+1. [Requirements](#requirements)
+2. [AWS Configuration](#aws-configuration)
+3. [Running the scripts](#running-the-scripts)
+
 ## Requirements
 These scripts depends on `boto3` package, the AWS SDK for Python and require Python 2.6+.
 You can install `boto3`using yum
