@@ -40,7 +40,7 @@ Dev i-07c96af5990dc9de0 ami-e28d098d vpc-90e3caf9 germain.lefebvre
 
 ## Description scripts
 
-### Reset account resources
+### Reset region resources
 
 Reset resources from an account depending on the region you mentioned (config or parameter).
 
@@ -51,7 +51,7 @@ You need to provide API Key with high rights elevation on AWS.
 
 #### Usage
 
-`./reset_account.py`
+`./delete_vpcs.py`
 ```
 Region is not defnied. You can define it in :
  - Arguments
@@ -61,9 +61,40 @@ Region is not defnied. You can define it in :
 #### Arguments
 `--region_name` : Takes the name of the AWS Region (eu-west-1, eu-central-1)
 
+`--check` : No argument. Enable check mode and do not apply deletions
+
 #### Examples
 
-`./delete_vpc.py`
+`./delete_vpcs.py`
 
-`./delete_vpc.py --region_name=eu-central-1`
+`./delete_vpcs.py -h`
+
+`./delete_vpcs.py --check`
+
+`./delete_vpcs.py --region_name=eu-central-1`
+
+
+### List non default VPCs and Instances with their creator
+
+#### Usage
+
+`./list_region_vpc.py`
+```
++-------------------------------------------+
+|    List non default VPCs and Instances    |
+|      for all regions with its owner.      |
++-------------------------------------------+
+Regions: ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2
+```
+
+#### Arguments
+`--check` : No argument. Enable check mode and do not apply deletions
+
+#### Examples
+
+`./list_region_vpc.py`
+
+`./list_region_vpc.py -h`
+
+`./list_region_vpc.py --check`
 
