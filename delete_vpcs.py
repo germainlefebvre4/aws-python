@@ -10,12 +10,12 @@ from botocore.exceptions import ClientError
 # Arguments Parser
 parser = argparse.ArgumentParser()
 parser.add_argument('--check',
-                                        default=False,
-                                        action='store_true',
-                                        help="Dry run")
+                    default=False,
+                    action='store_true',
+                    help="Dry run")
 parser.add_argument('--region_name',
-                                        required=False,
-                                        help="Region Name")
+                    required=False,
+                    help="Region Name")
 args = parser.parse_args()
 
 
@@ -30,24 +30,24 @@ if args.region_name is not None:
 
 # Throw error if region_name is not defined
 if region_name is None:
-    print("Region is not defnied. You can define it in :")
-    print(" - Arguments ")
-    print(" - File ~/.aws/config ([default] section)")
+    print "Region is not defnied. You can define it in :"
+    print " - Arguments "
+    print " - File ~/.aws/config ([default] section)"
     sys.exit(1)
 
 
 # Show global informations
 # Title
-print("+-------------------------------------------+")
-print("|        Delete non default VPCs and        |")
-print("|            and its sub-resources          |")
-print("+-------------------------------------------+")
+print "+-------------------------------------------+"
+print "|        Delete non default VPCs and        |"
+print "|            and its sub-resources          |"
+print "+-------------------------------------------+"
 # Region
-print("Region: %s" % region_name)
+print "Region: %s" % region_name
 # Check mode
 if args.check:
-    print("Check mode: True")
-print("")
+    print "Check mode: True"
+print ""
 
 
 ec2c = boto3.client('ec2', region_name=region_name)
