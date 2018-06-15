@@ -1,10 +1,11 @@
 #!/usr/bin/python2
+""" This script browse main AWS Services and delete all non-default resources"""
 
 import sys
 import time
 import argparse
 import boto3
-from boto3.session import Session
+#from boto3.session import Session
 from botocore.exceptions import ClientError
 
 # Arguments Parser
@@ -14,8 +15,8 @@ parser.add_argument('--check',
                     action='store_true',
                     help="Dry run")
 parser.add_argument('-r', '--region_name',
-                     required=False,
-                     help="Region Name")
+                    required=False,
+                    help="Region Name")
 args = parser.parse_args()
 
 # Ensure region_name is defined
@@ -45,7 +46,7 @@ print "+-----------------------------------+"
 print "Region: %s" % region_name
 # Check mode
 if args.check:
-  print "Check mode: True"
+    print "Check mode: True"
 print ""
 
 
@@ -68,7 +69,7 @@ for fs in fss:
 
     # Wait for mount targets be deleted
     mt_count = 1
-    while(mt_count != 0):
+    while mt_count != 0:
         time.sleep(1)
         mts = efsc.describe_mount_targets(FileSystemId=fs_id).get('MountTargets')
         mt_count = len(mts)
@@ -345,9 +346,11 @@ for bucket in buckets:
         #print bucket_name
         objs = s3c.list_objects_v2(Bucket=bucket_name)
         while objs['KeyCount'] > 0:
+            obj_del = [{'Key':obj['Key']} for obj in objs['Contents']]
             sys.stdout.write("S3 Bucket %s objets... " % bucket_name)
             if not args.check:
-                s3c.delete_objects(Bucket=bucket_name, Delete={'Objects':[{'Key':obj['Key']} for obj in objs['Contents']]})
+                s3c.delete_objects(Bucket=bucket_name,
+                                   Delete={'Objects': obj_del})
             print "deleted"
             objs = s3c.list_objects_v2(Bucket=bucket_name)
 
@@ -356,7 +359,7 @@ for bucket in buckets:
             if not args.check:
                 s3c.delete_bucket(Bucket=bucket_name)
             print "deleted"
-        except:
+        except ClientError as e:
             print "error"
 
 
@@ -381,12 +384,13 @@ if clfs is not None:
                 clf_conf['Enabled'] = False
                 sys.stdout.write("Distribution %s... " % clf_id)
                 if not args.check:
-                    clfc.update_distribution(Id=clf_id, IfMatch=clf_etag, DistributionConfig=clf_conf)
+                    clfc.update_distribution(Id=clf_id, IfMatch=clf_etag,
+                                             DistributionConfig=clf_conf)
                 print "disabling"
             print "(The following step might take time... long time...)"
             sys.stdout.write("Distribution %s... " % clf_id)
             clf_status = 'InProgress'
-            while(clf_status == 'InProgress'):
+            while clf_status == 'InProgress':
                 time.sleep(5)
                 clf_status = clfc.get_distribution(Id=clf_id).get('Distribution')['Status']
                 #print " ...%s" % clf_status
