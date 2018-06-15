@@ -1,7 +1,7 @@
 language: python
 install:
   - pip install pylint
-  - pip install ascli
+  - pip install awscli
   - pip install boto3
 script:
   - pylint delete_vpcs.py
