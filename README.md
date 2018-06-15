@@ -2,10 +2,22 @@
 
 Some useful scripts to list or clean entire environments.
 
-Table of Contents
+**Table of Contents**
 1. [Requirements](#requirements)
 2. [AWS Configuration](#aws-configuration)
+   1. [Create an Access Key](#create-an-access-key)
+   2. [Configure credentials](#configure-credentials)
+      1. [Guided configuration](#guided-configuration)
+      2. [Manual configuration](#manual-configuration)
 3. [Running the scripts](#running-the-scripts)
+   1. [Delete VPCs resources](#delete-vpcs-resources)
+      1. [Description](#description)
+      2. [Usage](#usage)
+      3. [Examples](#examples)
+   2. [List resources with their owner](#list-resources-with-their-owner)
+      1. [Description](#description)
+      2. [Usage](#usage)
+      3. [Examples](#examples)
 
 ## Requirements
 These scripts depends on `boto3` package, the AWS SDK for Python and require Python 2.6+.
@@ -18,7 +30,7 @@ or using pip
 $ pip install boto3
 ```
 
-## AWS onfiguration
+## AWS configuration
 
 ### Create an Access Key
 To use AWS API calls you need to make your account reachable with an Access Account. 
@@ -45,7 +57,7 @@ $ aws configure
 
 Your aws profile is ready.
 
-#### Manual configuratoin
+#### Manual configuration
 On Linux environments fill the configuration file at `~/.aws/credentials` with your credentials previously made :
 ```bash
 $ vi ~/.aws/credentials
