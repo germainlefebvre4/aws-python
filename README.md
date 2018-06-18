@@ -191,3 +191,92 @@ Run on a specific region (parameter override profile)
 ```bash
 $ ./reset_region.py --region_name=eu-central-1
 ```
+
+
+### List Resource Groups resources
+
+#### Description
+Name: `list_resource-groups.py`
+Description: Browse Resource Groups and show resources linked.
+Parameters:
+* `--check` : (none) Enable check mode and do not apply any action [implemented but not used yet]
+* `--region_name <region>` : (string) Name of the (only one) AWS Region (e.g. eu-west-1, eu-central-1)
+
+#### Usage
+```bash
+$ ./list_resource-groups.py
+```
+```
++----------------------------+
+|    List Resource Groups    |
+|         resources          |
++----------------------------+
+```
+
+#### Examples
+
+Show some help
+```bash
+$ ./list_resource-groups.py -h
+```
+
+Run on Dry Run
+```bash
+$ ./list_resource-groups.py --check
+```
+
+Run on a specific region (parameter override profile)
+```bash
+$ ./list_resource-groups.py --region_name=eu-central-1
+```
+
+
+### List Resource Groups resources
+
+#### Description
+Name: `control_resource-groups_instances.py`
+Description: Browse Resource Groups and show resources linked.
+Parameters:
+* `--check` : (none) Enable check mode and do not apply any action [implemented but not used yet]
+* `--region_name <Region>` : (string) Name of the (only one) AWS Region (e.g. eu-west-1, eu-central-1)
+* `--group_name <Resource Group>` : (string) Name of the Resource Group to control
+* `--start` : (none) Start Resource Groups instances
+* `--stop` : (none) Stop Resource Groups instances
+
+#### Usage
+```bash
+$ ./control_resource-groups_instances.py
+```
+```
++----------------------------+
+|    List Resource Groups    |
+|         resources          |
++----------------------------+
+```
+
+#### Examples
+
+Show some help
+```bash
+$ ./control_resource-groups_instances.py -h
+```
+
+Run on Dry Run
+```bash
+$ ./control_resource-groups_instances.py --check
+```
+
+Run on a specific region (parameter override profile)
+```bash
+$ ./control_resource-groups_instances.py --region_name=eu-central-1
+```
+
+Start all instances from all Resource Groups from the Region (region set in profile)
+```bash
+$ ./control_resource-groups_instances.py --start
+```
+
+Stop all instances included in Resource Group named `myRessGroup`
+```bash
+$ ./control_resource-groups_instances.py --group_name=myRessGroup --stop
+```
