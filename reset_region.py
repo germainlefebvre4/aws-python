@@ -1,4 +1,8 @@
 #!/usr/bin/python2
+# Tested versions:
+#   - Python 2.7.5
+#   - Boto3 1.4.6
+
 """ This script browse main AWS Services and delete all non-default resources"""
 
 import sys
@@ -303,7 +307,8 @@ subnets = ec2c.describe_subnets().get('Subnets')
 for subnet in subnets:
     if not subnet.get('DefaultForAz'):
         subnet_id = subnet.get('SubnetId')
-        ec2c.delete_subnet(SubnetId=subnet_id)
+        if not args.check:
+            ec2c.delete_subnet(SubnetId=subnet_id)
 
 print " Clean internet gateway"
 igws = ec2c.describe_internet_gateways().get('InternetGateways')

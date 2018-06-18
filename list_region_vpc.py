@@ -1,4 +1,8 @@
 #!/usr/bin/python2
+# Tested versions:
+#   - Python 2.7.5
+#   - Boto3 1.4.6
+
 
 import sys
 import time
@@ -41,14 +45,14 @@ for region_name in regions:
 
   # Region
   print("Region: %s" % region_name)
-
+  
   ec2r = boto3.resource('ec2', region_name=region_name)
   trailc = boto3.client('cloudtrail', region_name=region_name)
 
   # Vpc
   for vpc in ec2r.vpcs.all():
     if not vpc.is_default:
-      # Last trace
+      # Last trace 
       owner = trailc.lookup_events(LookupAttributes=[{'AttributeKey': 'EventName', 'AttributeValue': 'CreateVpc'}, {'AttributeKey': 'ResourceName', 'AttributeValue': vpc.vpc_id}])['Events'][0]['Username']
       print vpc.vpc_id, owner
 
@@ -60,3 +64,5 @@ for region_name in regions:
 
   del trailc
   del ec2r
+
+
