@@ -1,0 +1,6 @@
+aws_accounts:
+  - name: My AWS Account #1
+    access_key: ACCESS_KEY
+    secret_key: SECRET_KEY
+  - name: My AWS Account #2
+    profile: PROFILE_NAME
